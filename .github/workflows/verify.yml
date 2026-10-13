@@ -8,7 +8,11 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    strategy:
+      matrix:
+        base_path: ['/blueprintstudio', '']
     env:
+      NEXT_PUBLIC_BASE_PATH: ${{ matrix.base_path }}
       NEXT_TELEMETRY_DISABLED: '1'
     steps:
       - uses: actions/checkout@v4

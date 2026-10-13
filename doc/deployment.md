@@ -1,6 +1,6 @@
 # Static release deployment
 
-Planned destination: `https://blueprintstudio.schmidtpabst.com/`, a dedicated origin for browser-local projects. Hosting is not deployed or verified. Infrastructure preparation belongs in the schmidtpabst repository/session and requires explicit approval before DNS or server changes. Build with an explicit empty base path.
+Live public beta: `https://blueprintstudio.schmidtpabst.com/`, a dedicated origin for browser-local projects. Arthur approved the operator notice, logging policy and infrastructure deployment on 13 October 2026; HTTPS and live acceptance checks passed. Infrastructure preparation belongs in the schmidtpabst repository/session and requires explicit approval before DNS or server changes. Build with an explicit empty base path.
 
 ## Build and preview (retained path variant)
 
@@ -74,3 +74,11 @@ References: [Next.js static exports](https://nextjs.org/docs/app/guides/static-e
 ## Root and retained path verification
 
 `NEXT_PUBLIC_BASE_PATH='' pnpm test:e2e` uses the root preview and real root asset/help assertions. Leave the variable unset to retain `/blueprintstudio/` coverage with a matching path build. Rebuild before changing modes. For approved live checks, set `BLUEPRINT_E2E_BASE_URL=https://blueprintstudio.schmidtpabst.com/` plus the empty base path; this disables the preview startup and retains normal TLS validation. Browser profiles are isolated and fictional fixtures remain mandatory.
+
+## Launch record, 2026-10-13
+
+Deployed application source: `7b025e497822e035503bfe24074be87757549a0b`, the approved testing/documentation/hosting-notice patch on top of pinned public commit `6d830bead2c5f7750f8cf5777117af5b5e611c7b`. Static archive SHA-256: `8e0308bd68103b7d532a443095fc47a1e7b734a12935b71bcf438042f16c2fb2`; all 64 live file hashes match the approved artifact. The full suite against the live HTTPS origin passed 103 checks in isolated Chromium, Firefox, WebKit and phone-sized Chromium, with only the existing desktop-resize skip on mobile. Root/path local suites also passed 103 each. Production audit reports no known vulnerabilities; the disclosed development-only advisory remains.
+
+HTTPS validates with a dedicated Let's Encrypt certificate expiring 11 January 2027. HTTP redirects, help/notice slash redirects, static MIME types, caching/304s, manuals/fonts/licenses and genuine 404s were checked. Access logging records IP, time, method, path without query string, status, bytes and user-agent. Error diagnostics may include URLs/referrers. Both logs rotate daily, retaining 14 archives plus current; their actual modes are 0640 www-data:adm. The renewal and rotation timers are enabled. No Ghost container or existing site configuration was changed.
+
+The infrastructure repository records the exact server snapshot and rollback procedure. A first-release rollback preserves the isolated HTTPS origin with a maintenance response; later artifact rollback restores the previous immutable release. Asset rollback does not restore browser data. Mailbox delivery and real-user/device studies remain unverified/deferred. This follow-up changes launch documentation and adds a clean-Linux CI matrix for root and retained-path builds; it does not change the deployed artifact.

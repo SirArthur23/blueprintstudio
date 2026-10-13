@@ -2,7 +2,7 @@
 
 Plan an AI-assisted project with clear human ownership, review points, and data boundaries. Turn a rough idea into an editable workflow, an ownership matrix, starter prompts, and a report you can share.
 
-Free software by Arthur Schmidt-Pabst, licensed under MIT. [Source repository](https://github.com/SirArthur23/blueprintstudio). **Hosted public beta in preparation.** Intended app address: `https://blueprintstudio.schmidtpabst.com/`—hosting is not yet deployed or verified. Its dedicated origin isolates project storage from the Ghost sites; it does not encrypt browser storage. Export/import JSON to transfer work from localhost or preview.
+Free software by Arthur Schmidt-Pabst, licensed under MIT. [Source repository](https://github.com/SirArthur23/blueprintstudio). **Hosted public beta:** [Open Blueprint Studio](https://blueprintstudio.schmidtpabst.com/). HTTPS and the root static artifact were verified on 13 October 2026. Its dedicated origin isolates project storage from the Ghost sites; it does not encrypt browser storage. Export/import JSON to transfer work from localhost or preview.
 
 ## Start here
 

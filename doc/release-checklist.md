@@ -11,7 +11,7 @@ Status: preparation in progress. This document tracks evidence; completed coding
 - [x] English/German manuals reviewed against the scripted task journeys; twelve actual UI screenshots use an isolated fictional training project. Images, captions, alt text and full-size links are included in local help, source and static output; no real-user records/profile were captured.
 - [x] Maintainer-created public repository selected: `https://github.com/SirArthur23/blueprintstudio`. Private vulnerability reporting enabled and verified by GitHub API on 2026-10-13; no test report submitted.
 - [x] Maintainer/community feedback contact configured: Arthur Schmidt-Pabst, `blueprintstudio@schmidtpabst.com`. Mailbox provisioning/delivery is not tested by the app.
-- [ ] Complete host privacy/legal details, shared-origin review and access-log retention before hosted rollout.
+- [x] Arthur approved the dedicated-origin operator/privacy/imprint notice and access-log retention; configured and verified during the 2026-10-13 launch.
 - [x] Bundled font OFL notices retained; installed dependency inventory and supplied upstream license/README text included in source and static artifacts. See `doc/dependency-licenses.md` for scope and limits (486 installed name/version pairs after security refresh on this host; native tools excluded, metadata-only/absent optional references flagged).
 
 ## Verification
@@ -27,8 +27,8 @@ Status: preparation in progress. This document tracks evidence; completed coding
 ## Hosting and publication
 
 - [x] Static export and local preview prepared for `/blueprintstudio/`.
-- [ ] Confirm DNS/HTTPS and current `ai.schmidtpabst.com` hosting arrangement.
-- [ ] Review shared-origin storage implications and host access-log retention.
+- [x] Dedicated `blueprintstudio.schmidtpabst.com` DNS and HTTPS verified on 2026-10-13; the Ghost origin is separate.
+- [x] Dedicated origin, unencrypted browser storage, JSON transfers and the configured daily log rotation/retention documented and approved.
 - [x] Prepared a standalone source candidate at `release/source/hitm-blueprint/` and `release/hitm-blueprint-0.1.0-source.tar.gz`, using an explicit allowlist with per-file/whole-archive SHA-256 checks. Conversation history, private material, Git history, sibling projects, dependencies and caches excluded. No Git repository or remote created.
 - [x] Bilingual beta/version label, MIT attribution/license links, illustrated help and privacy-conscious feedback templates implemented and tested. Manual and source-feedback help links follow the selected language.
 - [x] Maintainer-approved repository and feedback defaults configured and browser-tested, with optional build-time overrides for forks. No project data is attached to either link.
@@ -36,7 +36,7 @@ Status: preparation in progress. This document tracks evidence; completed coding
 - [x] Maintainer explicitly approved source publication with the residual development-tool advisory documented on 2026-10-13.
 - [x] Upload the reviewed standalone source and verify remote files/blob hashes (`81a0edc`, 91 files, initial commit preserved); hosting is not included in this approval.
 - [x] Verify the published source in GitHub Actions on a clean Linux runner: [run 38432478264](https://github.com/SirArthur23/blueprintstudio/actions/runs/38432478264), commit `81a0edc`, passed.
-- [ ] Separately approve and publish the static artifact; verify live path/assets/help/backup behavior.
+- [x] Arthur approved and the root static artifact was published on 2026-10-13. All 64 live hashes and 103 live browser checks pass (existing mobile resize skip only); see the launch record in doc/deployment.md.
 - [ ] Record the five short videos after the interface/manual are stable; add captions and German/English language labels.
 
 SQL/data-source connections are scheduled after this release and require separate design and approval.
@@ -102,3 +102,7 @@ German generated content and the remaining HITM rules are implemented. Initial-r
 Planned URL: `https://blueprintstudio.schmidtpabst.com/`. Prepared in a permitted clean checkout based on public commit `6d830bead2c5f7750f8cf5777117af5b5e611c7b`, with a disclosed local testing/documentation/hosting-notice patch. Node 22.22.1 and project-selected pnpm 10.0.0. Frozen install, fresh production audit (no known findings), typecheck, lint, 249 unit tests and ordinary/static production builds pass. The expanded browser suite passes at both root and `/blueprintstudio/`: 103 passed per build, with only the existing phone-viewport desktop-resize skip. Each suite uses isolated fictional projects and checks runtime/console/network errors, same-origin static traffic, EN/DE, long text, governance, alternatives/restoration, JSON backups, persistence, help/notices, MIME types and genuine unknown-path 404s. The original retained-path 91-test suite also passed before expansion.
 
 The verified root `out/` artifact was preserved before the separate path regression build. Hosting is not deployed: DNS points to IONOS parking and TLS fails. Operator/logging/privacy notice, isolated vhost, certificate, artifact/configuration rollback and DNS changes require Arthur's approval in the infrastructure session. The original published README still names the old path; the updated source patch is prepared locally and has not been pushed. No owner browser profile or private records were used. Feedback delivery remains unverified, real-user/device work remains deferred, videos remain outlines and SQL is post-release.
+
+## Hosted launch, 2026-10-13
+
+The approved dedicated-origin beta is live at `https://blueprintstudio.schmidtpabst.com/`. Deployed application commit `7b025e497822e035503bfe24074be87757549a0b` and artifact SHA-256 `8e0308bd68103b7d532a443095fc47a1e7b734a12935b71bcf438042f16c2fb2` are recorded in doc/deployment.md. Live HTTPS validation, MIME/caching/304/404 checks, all 64 file hashes, and 103 isolated fictional-project browser checks passed. No private records or owner's browser profile were used. Source launch URL/privacy/testing updates were approved and published. The following CI matrix retains path coverage and adds root coverage on clean Linux; its result is separately verified rather than assumed. Prior preparation entries above record the state at their dates, not current unresolved infrastructure tasks.
