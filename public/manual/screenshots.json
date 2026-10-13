@@ -1,0 +1,78 @@
+{
+  "en": [
+    {
+      "id": "brief",
+      "file": "manual/en/brief.png",
+      "width": 288,
+      "height": 1068
+    },
+    {
+      "id": "workflow",
+      "file": "manual/en/workflow.png",
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "id": "checks",
+      "file": "manual/en/checks.png",
+      "width": 568,
+      "height": 1068
+    },
+    {
+      "id": "alternatives",
+      "file": "manual/en/alternatives.png",
+      "width": 568,
+      "height": 1068
+    },
+    {
+      "id": "report",
+      "file": "manual/en/report.png",
+      "width": 568,
+      "height": 774
+    },
+    {
+      "id": "backup",
+      "file": "manual/en/backup.png",
+      "width": 217,
+      "height": 388
+    }
+  ],
+  "de": [
+    {
+      "id": "brief",
+      "file": "manual/de/brief.png",
+      "width": 288,
+      "height": 1068
+    },
+    {
+      "id": "workflow",
+      "file": "manual/de/workflow.png",
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "id": "checks",
+      "file": "manual/de/checks.png",
+      "width": 568,
+      "height": 1068
+    },
+    {
+      "id": "alternatives",
+      "file": "manual/de/alternatives.png",
+      "width": 568,
+      "height": 1068
+    },
+    {
+      "id": "report",
+      "file": "manual/de/report.png",
+      "width": 568,
+      "height": 806
+    },
+    {
+      "id": "backup",
+      "file": "manual/de/backup.png",
+      "width": 217,
+      "height": 388
+    }
+  ]
+}
