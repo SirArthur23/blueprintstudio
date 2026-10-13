@@ -1,5 +1,7 @@
-import { test, expect, type Page } from "@playwright/test";
+import { expect, type Page } from "@playwright/test";
+import { test } from "./runtime-fixture";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "/blueprintstudio";
 const key = "hitm-blueprint-file-v6";
 async function saved(page: Page) {
   await expect(page.getByText("Saved locally", { exact: true })).toBeVisible();
@@ -114,10 +116,11 @@ test("production assets and help stay under the deployment path, with no runtime
   await page.reload();
   await saved(page);
   await page.getByRole("button", { name: "More", exact: true }).click();
-  await expect(page.getByRole("link", { name: "Manual & privacy", exact: true })).toHaveAttribute("href", "/blueprintstudio/help/#english");
+  await expect(page.getByRole("link", { name: "Manual & privacy", exact: true })).toHaveAttribute("href", `${basePath}/help/#english`);
   const assetPaths = await page.locator("script[src],link[rel=stylesheet],link[as=font]").evaluateAll((elements) => elements.map((el) => el.getAttribute("src") || el.getAttribute("href")));
   expect(assetPaths.length).toBeGreaterThan(0);
-  expect(assetPaths.every((path) => path?.startsWith("/blueprintstudio/"))).toBe(true);
+  expect(assetPaths.every((path) => path?.startsWith(`${basePath}/`))).toBe(true);
+  expect(assetPaths.every((path) => !path?.startsWith("//"))).toBe(true);
   await page.goto("help/");
   await expect(page.getByRole("heading", { name: "Manual / Handbuch", exact: true })).toBeVisible();
   expect(errors).toEqual([]);

@@ -86,5 +86,8 @@
   "tests/unit/public-release.test.ts",
   "tests/unit/manual-gallery.test.ts",
   "tsconfig.json",
-  "vitest.config.mts"
+  "vitest.config.mts",
+  "tests/e2e/hosting.spec.ts",
+  "tests/e2e/runtime-fixture.ts",
+  "public/hosting/index.html"
 ]

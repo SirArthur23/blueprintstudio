@@ -1,4 +1,5 @@
-import { test, expect } from "@playwright/test";
+import { expect } from "@playwright/test";
+import { test } from "./runtime-fixture";
 import { createBlankBlueprint, generateDraftWorkflow } from "../../src/lib/blueprint-engine";
 
 for (const locale of ["en", "de"] as const) {

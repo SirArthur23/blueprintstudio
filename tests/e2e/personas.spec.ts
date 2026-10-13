@@ -1,4 +1,5 @@
-import { test, expect } from "@playwright/test";
+import { expect } from "@playwright/test";
+import { test } from "./runtime-fixture";
 import { readFile } from "node:fs/promises";
 import { personaBlueprint, personaScenarios } from "../fixtures/personas";
 

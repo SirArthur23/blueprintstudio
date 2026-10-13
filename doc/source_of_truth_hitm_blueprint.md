@@ -1013,3 +1013,7 @@ Those can be considered later only if they strengthen the HITM planning use case
 Judgment before automation.
 
 The app should help people design AI-assisted systems where humans own the goals, context, approvals, changes, and final decisions. AI can assist, draft, classify, suggest, critique, and organize. It does not own the project.
+
+## Dedicated-origin beta preparation, 2026-10-13
+
+Prepared from the public standalone commit `6d830bead2c5f7750f8cf5777117af5b5e611c7b` in a clean checkout. The planned launch URL is `https://blueprintstudio.schmidtpabst.com/`; the root static build requires explicit `NEXT_PUBLIC_BASE_PATH=''`. Project behavior, dependencies and lockfile are unchanged. Browser configuration and real URL assertions now cover root and retained path builds, with isolated runtime/network monitoring and hosting checks. A bilingual operator/privacy/imprint notice is linked from Help; its operator details and proposed logging policy require Arthur's launch approval. Read-only DNS inspection found A `217.160.0.203` and AAAA `2001:8d8:100f:f000::200`, rather than the existing VPS `217.154.1.70`. No infrastructure changes or hosted launch are authorized by these preparation edits. Root/path verification and artifact checksums are recorded by the infrastructure session before requesting approval. Feedback delivery and real-device/user studies remain unverified/deferred; videos remain outlines and SQL remains post-release.

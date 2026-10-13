@@ -2,7 +2,7 @@
 
 Plan an AI-assisted project with clear human ownership, review points, and data boundaries. Turn a rough idea into an editable workflow, an ownership matrix, starter prompts, and a report you can share.
 
-Free software by Arthur Schmidt-Pabst, licensed under MIT. [Source repository](https://github.com/SirArthur23/blueprintstudio). **Hosted public beta in preparation.** Intended app address: `https://ai.schmidtpabst.com/blueprintstudio/`—hosting is not yet deployed or verified.
+Free software by Arthur Schmidt-Pabst, licensed under MIT. [Source repository](https://github.com/SirArthur23/blueprintstudio). **Hosted public beta in preparation.** Intended app address: `https://blueprintstudio.schmidtpabst.com/`—hosting is not yet deployed or verified. Its dedicated origin isolates project storage from the Ghost sites; it does not encrypt browser storage. Export/import JSON to transfer work from localhost or preview.
 
 ## Start here
 
@@ -51,18 +51,18 @@ pnpm test:e2e
 pnpm package:source
 ```
 
-Unit tests exercise generation, warnings, alternatives, backup validation, and migrations. Browser tests run against the exported build at `/blueprintstudio/`. Five fictional persona scenarios provide simulated task coverage. [Testing and simulation protocol](doc/testing.md) explains coverage and limits; these scenarios are not real-user UX research.
+Unit tests exercise generation, warnings, alternatives, backup validation, and migrations. Browser tests use `/blueprintstudio/` by default; set `NEXT_PUBLIC_BASE_PATH=''` for both build and tests to verify the dedicated root deployment. Five fictional persona scenarios provide simulated task coverage. [Testing and simulation protocol](doc/testing.md) explains coverage and limits; these scenarios are not real-user UX research.
 
 The 2026-10-13 production dependency audit is clean after the compatible security refresh. A full audit still reports one unpatched, development-only glob-parser advisory in lint tooling. See the [security audit record](doc/security-audit.md) for the exact chain, limits and publication status. Do not run tooling with untrusted configuration outside an isolated environment.
 
 ## Static hosting
 
 ```sh
-pnpm build:release
-pnpm preview:release
+NEXT_PUBLIC_BASE_PATH='' pnpm build:release
+NEXT_PUBLIC_BASE_PATH='' pnpm preview:release
 ```
 
-Preview at `http://127.0.0.1:3031/blueprintstudio/`. The release build exports to `.next-release/` and prepares the complete handoff artifact in `out/`. See [deployment instructions](doc/deployment.md) for path configuration and release preparation. Building and previewing do not publish anything.
+Preview the planned dedicated-origin release at `http://127.0.0.1:3031/`. The release build exports to `.next-release/` and prepares the complete handoff artifact in `out/`. See [deployment instructions](doc/deployment.md) for path configuration and release preparation. Building and previewing do not publish anything.
 
 The app displays its beta version. Maintainer-approved public defaults point to this repository and [blueprintstudio@schmidtpabst.com](mailto:blueprintstudio@schmidtpabst.com). Build-time `NEXT_PUBLIC_BLUEPRINT_SOURCE_URL` / `NEXT_PUBLIC_BLUEPRINT_FEEDBACK_URL` can override them for a fork or self-hosted deployment; an explicit empty value disables a link. No project content is attached to those links. The app does not provision a mailbox or verify delivery. To refresh the fictional manual screenshots: build the static preview, run `pnpm manual:screenshots`, visually review, then rebuild the export.
 

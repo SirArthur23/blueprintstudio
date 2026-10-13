@@ -44,6 +44,7 @@ export default function HelpPage() {
       <h1>Manual / Handbuch</h1>
       <p>Public beta preparation · Vorbereitung der öffentlichen Beta</p>
       <nav aria-label="Help language"><a href="#english">English</a><a href="#deutsch">Deutsch</a></nav>
+      {process.env.BLUEPRINT_STATIC_EXPORT === "1" ? <p><a href={`${basePath}/hosting/`}>Operator, privacy & imprint / Betreiber, Datenschutz & Impressum</a></p> : null}
       {process.env.BLUEPRINT_STATIC_EXPORT === "1" ? <nav aria-label="Full manuals"><a href={`${basePath}/doc/manual.en.md`}>Full English manual (Markdown)</a><a href={`${basePath}/doc/manual.de.md`}>Deutsches Handbuch (Markdown)</a><a href={`${basePath}/PRIVACY.md`}>Privacy / Datenschutz</a></nav> : null}
       <section id="english" lang="en">
         <h2>Your first blueprint</h2>

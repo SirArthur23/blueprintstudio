@@ -1,21 +1,23 @@
-import { test, expect } from "@playwright/test";
+import { expect } from "@playwright/test";
+import { test } from "./runtime-fixture";
 import { manualScreenshots } from "../../src/lib/manual-gallery";
 import { releaseLinks, releaseVersion } from "../../src/lib/public-release";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "/blueprintstudio";
 test("beta version and bilingual source-feedback routes are explicit and local", async ({ page }) => {
   await page.goto("./");
   await expect(page.getByText("Saved locally", { exact: true })).toBeVisible();
   await expect(page.locator(".beta-label")).toHaveText(`Beta preview · ${releaseVersion}`);
   await page.getByRole("button", { name: "More", exact: true }).click();
   const source = page.getByRole("link", { name: "Source & feedback", exact: true });
-  await expect(source).toHaveAttribute("href", "/blueprintstudio/help/#en-release");
+  await expect(source).toHaveAttribute("href", `${basePath}/help/#en-release`);
   await expect(source).toHaveAttribute("rel", "noopener noreferrer");
   await page.keyboard.press("Escape");
   await page.getByRole("button", { name: "DE", exact: true }).click();
   await expect(page.locator(".beta-label")).toHaveText(`Beta-Vorschau · ${releaseVersion}`);
   await page.getByRole("button", { name: "Mehr", exact: true }).click();
-  await expect(page.getByRole("link", { name: "Handbuch & Datenschutz", exact: true })).toHaveAttribute("href", "/blueprintstudio/help/#deutsch");
-  await expect(page.getByRole("link", { name: "Quellcode & Rückmeldung", exact: true })).toHaveAttribute("href", "/blueprintstudio/help/#de-release");
+  await expect(page.getByRole("link", { name: "Handbuch & Datenschutz", exact: true })).toHaveAttribute("href", `${basePath}/help/#deutsch`);
+  await expect(page.getByRole("link", { name: "Quellcode & Rückmeldung", exact: true })).toHaveAttribute("href", `${basePath}/help/#de-release`);
 });
 
 test("illustrated bilingual help and feedback documents work under the deployment path", async ({ page, request }) => {
@@ -33,7 +35,7 @@ test("illustrated bilingual help and feedback documents work under the deploymen
   for (const locale of ["en", "de"] as const) {
     for (const shot of manualScreenshots(locale)) {
       const image = page.locator(`img[alt=${JSON.stringify(shot.alt)}]`);
-      await expect(image).toHaveAttribute("src", `/blueprintstudio/${shot.file}`);
+      await expect(image).toHaveAttribute("src", `${basePath}/${shot.file}`);
       const response = await request.get(shot.file);
       expect(response.status()).toBe(200);
       expect(response.headers()["content-type"]).toBe("image/png");

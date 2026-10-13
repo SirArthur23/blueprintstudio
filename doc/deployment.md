@@ -1,8 +1,8 @@
 # Static release deployment
 
-Planned destination: `https://ai.schmidtpabst.com/blueprintstudio/`. This is a hostname plus a path; the existing host may serve other apps. Publishing requires a final review of the host and artifact.
+Planned destination: `https://blueprintstudio.schmidtpabst.com/`, a dedicated origin for browser-local projects. Hosting is not deployed or verified. Infrastructure preparation belongs in the schmidtpabst repository/session and requires explicit approval before DNS or server changes. Build with an explicit empty base path.
 
-## Build and preview
+## Build and preview (retained path variant)
 
 ```sh
 pnpm install --frozen-lockfile
@@ -47,7 +47,7 @@ Screenshot metadata stores intrinsic dimensions; captions/alt text are bilingual
 
 Use HTTPS. Preserve directory index serving and trailing-slash redirects. Unknown paths should return 404. Serve hashed `_next/static/` assets with long-lived caching and HTML with revalidation. Confirm all URLs work under the configured path, especially locally bundled font files and help.
 
-Browser local storage is tied to scheme/hostname/port, not URL path. `http://localhost:3021`, the local preview, and the public hostname each have different storage. Users need JSON backups to transfer work. Other applications on `ai.schmidtpabst.com` share the origin and must be trusted accordingly.
+Browser local storage is tied to scheme/hostname/port, not URL path. `http://localhost:3021`, the local preview, and the public hostname each have different storage. Users need JSON backups to transfer work. The dedicated public origin isolates project storage from the Ghost sites. It does not encrypt local storage. Applications on the same hostname still share an origin.
 
 Confirm the operator's access-log retention and contact/privacy/legal notices before publishing. The app adds no analytics or project-upload endpoint. Do not silently add analytics during host setup.
 
@@ -70,3 +70,7 @@ Run the exported-build browser suite before upload. After approved publication, 
 Retain the previous verified static artifact for rollback. Reverting assets does not revert browser data; keep storage-schema migrations compatible and ask users to export backups before a breaking upgrade. Record artifact version, date, build commands, and actual host checks in the release record.
 
 References: [Next.js static exports](https://nextjs.org/docs/app/guides/static-exports), [Next.js basePath](https://nextjs.org/docs/app/api-reference/config/next-config-js/basePath).
+
+## Root and retained path verification
+
+`NEXT_PUBLIC_BASE_PATH='' pnpm test:e2e` uses the root preview and real root asset/help assertions. Leave the variable unset to retain `/blueprintstudio/` coverage with a matching path build. Rebuild before changing modes. For approved live checks, set `BLUEPRINT_E2E_BASE_URL=https://blueprintstudio.schmidtpabst.com/` plus the empty base path; this disables the preview startup and retains normal TLS validation. Browser profiles are isolated and fictional fixtures remain mandatory.
