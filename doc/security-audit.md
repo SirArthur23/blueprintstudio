@@ -34,13 +34,15 @@ Observed in this repository: the release uses static export, its images are expl
 
 Keep development servers bound to loopback. Do not expose `next dev` or substitute a public Next.js server for the documented static deployment. Hosting has not been deployed.
 
-## Required follow-up
+## Publication and follow-up
+
+The reviewed source was uploaded to [SirArthur23/blueprintstudio](https://github.com/SirArthur23/blueprintstudio) as commit `81a0edc` on 2026-10-13. All 91 remote files/blob hashes match the reviewed snapshot, and the original commit is preserved. [Clean Linux verification run 38432478264](https://github.com/SirArthur23/blueprintstudio/actions/runs/38432478264) passed, including the production advisory gate and functional/source checks. Hosting has not been deployed. Passing CI does not resolve or hide the development-only advisory.
 
 - Dependency-update approval received; compatible publisher versions and transitive refresh applied inside the project only. The new project-local pnpm store is ignored and refused by the source packager.
 - Advisory and license checks repeated; new Sharp combined license declarations and README library notices retained. Native/WebAssembly build-tool binaries are not redistributed.
 - Typecheck, lint, 249 unit tests, both builds and 91 browser tests pass (one intentional mobile resize skip). Source package file/manifest/archive hashes and cache-free staged typechecking verified; see the release checklist.
 - Maintainer approved source publication with the disclosed development-tool limitation; do not describe the full graph as clean.
 - Reviewed source package contains 90 files plus its SHA-256 manifest, excluding private history/workspace material. Repackage after any further approved change.
-- Upload only after the chosen review gate; separately verify GitHub CI and hosted deployment when authorized.
+- Source upload passed the approved review gate. Verify GitHub CI separately; hosted deployment still needs separate approval and host review.
 
 Private GitHub vulnerability reporting is enabled on `SirArthur23/blueprintstudio`. The feedback mailbox is configured but not provisioned or delivery-tested by the app.

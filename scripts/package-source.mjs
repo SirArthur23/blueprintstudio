@@ -57,7 +57,7 @@ export async function packageSource() {
     entries.push({ path: `third-party/${file}`, bytes: bytes.length, sha256: hash(bytes) });
   }
   const project = JSON.parse(await readFile(path.join(root, "package.json"), "utf8"));
-  const manifest = { schemaVersion: 1, name: project.name, version: project.version, status: "Prepared locally; not published", exclusions: ["Conversation history DOCX", "Private notes/backups and environment files", "Sibling projects", "Git history", "node_modules and build/test caches"], files: entries.sort((a, b) => a.path.localeCompare(b.path)) };
+  const manifest = { schemaVersion: 1, name: project.name, version: project.version, status: "Prepared source snapshot; packaging does not publish", exclusions: ["Conversation history DOCX", "Private notes/backups and environment files", "Sibling projects", "Git history", "node_modules and build/test caches"], files: entries.sort((a, b) => a.path.localeCompare(b.path)) };
   await writeFile(path.join(destination, "SOURCE_MANIFEST.json"), `${JSON.stringify(manifest, null, 2)}\n`);
   const archive = `hitm-blueprint-${project.version}-source.tar.gz`;
   const result = spawnSync("tar", ["-czf", path.join(root, "release", archive), "-C", path.dirname(destination), path.basename(destination)], { stdio: "inherit" });

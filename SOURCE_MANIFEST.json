@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "name": "hitm-blueprint",
   "version": "0.1.0",
-  "status": "Prepared locally; not published",
+  "status": "Prepared source snapshot; packaging does not publish",
   "exclusions": [
     "Conversation history DOCX",
     "Private notes/backups and environment files",
@@ -78,13 +78,13 @@
     },
     {
       "path": "doc/release-checklist.md",
-      "bytes": 13165,
-      "sha256": "ddd0f96a8ea3e32f0141fadcea7844dc020dcaf7d298f54dde06b6604ad3c95e"
+      "bytes": 14993,
+      "sha256": "e9478919f9283a9d5ac8ce9f73dddbe998896be760c9aafdb0f197745055a91f"
     },
     {
       "path": "doc/security-audit.md",
-      "bytes": 5404,
-      "sha256": "acd4c6c3a4c8dedf9d2ea7e77a308696e84d5bbc17a889efb119957b441a736a"
+      "bytes": 5983,
+      "sha256": "e177c2a578864e7ddc3f7459ae208cff59b74d1058d5d2a5d9864a9ab606ec08"
     },
     {
       "path": "doc/simulation-report.md",
@@ -93,8 +93,8 @@
     },
     {
       "path": "doc/source_of_truth_hitm_blueprint.md",
-      "bytes": 51764,
-      "sha256": "0d2728ae74a0066e989ae3cc65b7926a62fc415b1b82c8ba59b5fd1fc0bf02b1"
+      "bytes": 53284,
+      "sha256": "b29c771567347c541c28a9d65408166c281c1f2eca7f49230f7c73c330940439"
     },
     {
       "path": "doc/testing.md",
@@ -280,8 +280,8 @@
     },
     {
       "path": "scripts/package-source.mjs",
-      "bytes": 5060,
-      "sha256": "849ab9bf40597ee937b71c3a1bd0054231b609ebba4c394c2f0bb42aae44538d"
+      "bytes": 5081,
+      "sha256": "1b79efb1de5377837309a13522f225ac509bd428e0d8ba3c8a92c8b1bb60564d"
     },
     {
       "path": "scripts/preview-release.mjs",

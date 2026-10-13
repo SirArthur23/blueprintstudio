@@ -34,7 +34,8 @@ Status: preparation in progress. This document tracks evidence; completed coding
 - [x] Maintainer-approved repository and feedback defaults configured and browser-tested, with optional build-time overrides for forks. No project data is attached to either link.
 - [x] Apply the maintainer-approved compatible security update and repeat release checks. Production audit reports no known vulnerabilities; full audit retains one unpatched development-only advisory, disclosed in `doc/security-audit.md`.
 - [x] Maintainer explicitly approved source publication with the residual development-tool advisory documented on 2026-10-13.
-- [ ] Upload the reviewed standalone source and verify remote files/CI; hosting is not included in this approval.
+- [x] Upload the reviewed standalone source and verify remote files/blob hashes (`81a0edc`, 91 files, initial commit preserved); hosting is not included in this approval.
+- [x] Verify the published source in GitHub Actions on a clean Linux runner: [run 38432478264](https://github.com/SirArthur23/blueprintstudio/actions/runs/38432478264), commit `81a0edc`, passed.
 - [ ] Separately approve and publish the static artifact; verify live path/assets/help/backup behavior.
 - [ ] Record the five short videos after the interface/manual are stable; add captions and German/English language labels.
 
@@ -87,3 +88,11 @@ German generated content and the remaining HITM rules are implemented. Initial-r
 
 - Maintainer explicitly chose “Upload with documented limitation” after the clean production audit and disclosure of the remaining development-only advisory. The source security record and README retain the warning; no audit finding is suppressed.
 - Approved scope is the reviewed standalone source in `SirArthur23/blueprintstudio`, preserving its initial commit and excluding parent workspace history/private material. Hosted deployment remains separately pending.
+
+## Source publication, 2026-10-13
+
+- Published reviewed source as `81a0edc` to the existing public repository, preserving `27a6a5d` without a force push. Exact remote file list and all Git blob hashes match the reviewed snapshot: 90 files plus its manifest. Binaries included are only the reviewed fonts and fictional manual screenshots, not dependency/build tooling.
+- Private GitHub vulnerability reporting remains enabled. Production advisory gate, builds and checks run through the included GitHub workflow; its result is recorded separately from local verification.
+- Source packaging manifest status now describes a prepared snapshot without claiming that the repository is unpublished. The packager itself still performs no publication.
+- Only the isolated project-local checkout was committed/pushed; the surrounding workspace repository and private history are untouched. No hosted deployment, release tag, GitHub Release or video recording was created.
+- Clean Linux GitHub verification passed: frozen-lockfile installation, production advisory check, typecheck, lint, 249 unit tests, normal/static builds, 91 browser tests (one intentional mobile resize skip) and source packaging. Linux inventory recorded 389 installed name/version pairs, 22 without separate notices (11 without README terms either), and 114 absent optional/peer references; platform-dependent counts differ from the local reinstall as disclosed. This is independent clean-runner evidence, not just reuse of the local dependency installation. The source workflow performs no hosting deployment.

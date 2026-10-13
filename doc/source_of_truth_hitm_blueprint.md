@@ -983,6 +983,16 @@ Implemented on 2026-10-13:
 - Publish only the reviewed standalone source to `SirArthur23/blueprintstudio`, preserving the maintainer's initial commit. Do not publish parent workspace history, private conversation files, backups, environment files or dependency/build caches.
 - Hosted deployment is not part of this approval; host privacy/legal review, live-site checks and video recordings remain separate work.
 
+### Standalone Source Published
+
+2026-10-13:
+
+- Published the approved standalone snapshot to `https://github.com/SirArthur23/blueprintstudio` as commit `81a0edc`, preserving initial commit `27a6a5d` without rewriting history. Verified the exact 91-file remote tree and every Git blob hash against the reviewed package.
+- MIT attribution, bilingual manuals/screenshots, fictional persona/browser tests, private security-reporting instructions, production audit gate and disclosed development-only advisory are included. Private reporting remains enabled; mailbox delivery is not claimed.
+- Source-packaging manifest status distinguishes preparing a snapshot from publishing it; packaging never creates external commits or deploys. GitHub CI is verified separately from local checks.
+- Committed/pushed only the project-local standalone checkout. Parent workspace Git history, private conversation/backups, siblings and dependency/build caches were not published. No hosting deployment, release tag or GitHub Release was made. Host/privacy/legal review and videos remain next steps.
+- Clean Linux GitHub Actions verification passed for published commit `81a0edc`: frozen-lockfile install, clean production advisory result, typecheck, lint, unit tests, normal/static builds, browser tests and source packaging. Evidence: `https://github.com/SirArthur23/blueprintstudio/actions/runs/38432478264`. This adds a separate clean-runner install to the earlier local evidence; it is not a security or real-user UX certification.
+
 ## Non-Goals For V1
 
 V1 should not include:
