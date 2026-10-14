@@ -49,10 +49,16 @@ test("first visit is bilingual, accessible and remembers dismissal without chang
   await page.getByRole("button", { name: "More", exact: true }).click();
   await page.getByRole("button", { name: "Welcome to Studio", exact: true }).click();
   await expect(dialog).toBeVisible();
+  // A real visitor can read the reopened welcome before changing dialogs.
+  // Preserve decoding/network assertions rather than cancelling its image transfer.
+  await artwork.evaluate((el) => (el as HTMLImageElement).decode());
+  await page.waitForLoadState("networkidle");
   await dialog.getByRole("button", { name: "Show the quick guide", exact: true }).click();
   await expect(dialog).toHaveAccessibleName("Build a human-owned AI workflow");
   await dialog.getByRole("button", { name: "Welcome to Studio", exact: true }).click();
   await expect(dialog).toHaveAccessibleName("Plan AI support. Keep people in charge.");
+  await artwork.evaluate((el) => (el as HTMLImageElement).decode());
+  await page.waitForLoadState("networkidle");
   await dialog.getByRole("button", { name: "Explore Studio", exact: true }).click();
   await expect(dialog).toHaveCount(0);
   expect(await page.evaluate((key) => localStorage.getItem(key), storageKey)).toBe(before);

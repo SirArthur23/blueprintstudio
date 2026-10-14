@@ -1,5 +1,6 @@
-import { test as base, expect, type Page } from "@playwright/test";
+import { test as base, expect, type Page, type Request } from "@playwright/test";
 import { brandAssets } from "../../src/lib/brand";
+import { isVerifiedImageRevalidationCancellation } from "./runtime-image-check";
 
 const decodedImages = new WeakMap<Page, Set<string>>();
 
@@ -40,28 +41,28 @@ export const test = base.extend<{ runtimeChecks: void; skipWelcome: boolean }>({
     const errors: string[] = [];
     const unexpectedRequests: string[] = [];
     const origin = new URL(baseURL!).origin;
-    const favicon = new URL(brandAssets.mark.src, baseURL!).href;
+    const knownImages = new Set([brandAssets.mark.src, brandAssets.artwork.src].map(src => new URL(src, baseURL!).href));
+    const responseStatuses = new WeakMap<Request, number>();
     const nativeCancellations: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
     page.on("console", (entry) => { if (entry.type() === "error") errors.push(entry.text()); });
     page.on("requestfailed", (request) => {
       const code = request.failure()?.errorText;
-      // Narrow client-cancellation classification, never a blanket PNG/error ignore.
-      // A visible image decode must already have succeeded for this exact URL.
-      // HTTP errors, decode errors, other browser codes and console errors still fail.
-      if (browserName === "firefox" && code === "NS_BINDING_ABORTED" &&
-          request.url() === favicon && decodedImages.get(page)?.has(favicon)) {
+      // Firefox may abort a redundant 304 validation after using decoded cache bytes.
+      // Require the exact known image, successful decoding, native code and 304.
+      if (isVerifiedImageRevalidationCancellation({ browserName, code, url: request.url(),
+          status: responseStatuses.get(request), knownImages, decodedImages: decodedImages.get(page) })) {
         nativeCancellations.push(`${request.url()}: ${code}`);
       } else errors.push(`${request.url()}: ${code}`);
     });
-    page.on("response", (response) => { if (response.status() >= 400) errors.push(`${response.status()}: ${response.url()}`); });
+    page.on("response", (response) => { responseStatuses.set(response.request(), response.status()); if (response.status() >= 400) errors.push(`${response.status()}: ${response.url()}`); });
     page.on("request", (request) => {
       if (new URL(request.url()).origin !== origin || !["GET", "HEAD"].includes(request.method())) {
         unexpectedRequests.push(`${request.method()}: ${request.url()}`);
       }
     });
     await use();
-    if (nativeCancellations.length) await testInfo.attach("verified-native-favicon-cancellations", { body: JSON.stringify(nativeCancellations), contentType: "application/json" });
+    if (nativeCancellations.length) await testInfo.attach("verified-native-image-revalidation-cancellations", { body: JSON.stringify(nativeCancellations), contentType: "application/json" });
     expect(errors, "No browser, hydration, console or network failures").toEqual([]);
     expect(unexpectedRequests, "Only same-origin static GET/HEAD requests").toEqual([]);
   }, { auto: true }],
