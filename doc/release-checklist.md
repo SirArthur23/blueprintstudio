@@ -27,8 +27,9 @@ Status: preparation in progress. This document tracks evidence; completed coding
 ## Hosting and publication
 
 - [x] Static export and local preview prepared for `/blueprintstudio/`.
-- [x] Dedicated `blueprintstudio.schmidtpabst.com` DNS and HTTPS verified on 2026-10-13; the Ghost origin is separate.
-- [x] Dedicated origin, unencrypted browser storage, JSON transfers and the configured daily log rotation/retention documented and approved.
+- [x] Maintainer chose a separate origin and reports creating `blueprintstudio.schmidtpabst.com`; IONOS hosting via SSH confirmed by the maintainer.
+- [x] Dedicated `blueprintstudio.schmidtpabst.com` DNS, HTTPS and root static vhost verified during the 2026-10-13 launch; root and retained-path suites passed.
+- [x] Dedicated origin, unencrypted browser storage, JSON transfers and daily log rotation/retention documented and approved.
 - [x] Prepared a standalone source candidate at `release/source/hitm-blueprint/` and `release/hitm-blueprint-0.1.0-source.tar.gz`, using an explicit allowlist with per-file/whole-archive SHA-256 checks. Conversation history, private material, Git history, sibling projects, dependencies and caches excluded. No Git repository or remote created.
 - [x] Bilingual beta/version label, MIT attribution/license links, illustrated help and privacy-conscious feedback templates implemented and tested. Manual and source-feedback help links follow the selected language.
 - [x] Maintainer-approved repository and feedback defaults configured and browser-tested, with optional build-time overrides for forks. No project data is attached to either link.
@@ -106,3 +107,19 @@ The verified root `out/` artifact was preserved before the separate path regress
 ## Hosted launch, 2026-10-13
 
 The approved dedicated-origin beta is live at `https://blueprintstudio.schmidtpabst.com/`. Deployed application commit `7b025e497822e035503bfe24074be87757549a0b` and artifact SHA-256 `8e0308bd68103b7d532a443095fc47a1e7b734a12935b71bcf438042f16c2fb2` are recorded in doc/deployment.md. Live HTTPS validation, MIME/caching/304/404 checks, all 64 file hashes, and 103 isolated fictional-project browser checks passed. No private records or owner's browser profile were used. Source launch URL/privacy/testing updates were approved and published. The following CI matrix retains path coverage and adds root coverage on clean Linux; its result is separately verified rather than assumed. Prior preparation entries above record the state at their dates, not current unresolved infrastructure tasks.
+
+## Dedicated hostname and hosting handoff, 2026-10-13
+
+This historical preparation record is superseded by the hosted-launch record above.
+
+- Maintainer selected a separate subdomain, reports it created, and prefers infrastructure work in the `schmidtpabst.com` session. Local [handoff](hosting-handoff.md) includes pinned source/CI evidence, root build instructions, test caveats, privacy/logging review, live acceptance and rollback requirements.
+- Public read-only checks found HTTPS working on the existing AI site, the old app path returning 404, and TLS handshake failure on the new hostname. Exact DNS, certificate and SSH/server settings remain unverified. No host changes were made.
+- Published source commit `6d830be` passed [final CI run 38433293814](https://github.com/SirArthur23/blueprintstudio/actions/runs/38433293814). Its `/blueprintstudio/` coverage must not be represented as new root-hosting verification. The handoff and this hostname decision are local, not yet pushed or sent to another session.
+
+## Welcome and branding update, 2026-10-14
+
+- Reconciled published `8ef9b8f` deployment/hosting changes without touching the website workspace or server; preserved local handoff/history. Added EN/DE first-visit welcome with a separate dismissal preference, safe draft preservation and manual reopening.
+- Supplied transparent mark replaces header logo/favicon. Full artwork is used in welcome, Help and both manuals. Copies are byte-identical; source allowlist includes both assets. Mint is modestly cooled with checked primary/deep text contrast; no artwork behind editable canvas content.
+- Typecheck, lint, 262 unit tests, ordinary build and root/path static builds pass. Each complete browser run passes 127 tests across Chromium/Firefox/WebKit/phone-sized Chromium with one intentional desktop-resize mobile skip. Includes German short-screen readability, image loading, same-origin static traffic, keyboard/draft protection and runtime/hydration checks.
+- Refreshed twelve fictional EN/DE manual screenshots; both capture cases pass. Inspected welcome, short German welcome and German workflow images. Production audit remains clean; previously disclosed development-only advisory is unchanged. No real-user/device/accessibility certification is claimed.
+- At completion of implementation, root static candidate and reviewed source packaging were local preparation only. Arthur subsequently approved source publication and the exact-commit deployment handoff. A new live-artifact replacement remains a separate infrastructure-chat approval; no SSH/DNS change was made by this app chat.

@@ -1,7 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "/blueprintstudio";
-const baseURL = process.env.BLUEPRINT_E2E_BASE_URL ?? `http://127.0.0.1:3031${basePath}/`;
+const baseURL = process.env.BLUEPRINT_E2E_BASE_URL ?? `http://127.0.0.1:${process.env.BLUEPRINT_PREVIEW_PORT ?? "3031"}${basePath}/`;
 
 export default defineConfig({
   testDir: "./tests/e2e",

@@ -993,6 +993,41 @@ Implemented on 2026-10-13:
 - Committed/pushed only the project-local standalone checkout. Parent workspace Git history, private conversation/backups, siblings and dependency/build caches were not published. No hosting deployment, release tag or GitHub Release was made. Host/privacy/legal review and videos remain next steps.
 - Clean Linux GitHub Actions verification passed for published commit `81a0edc`: frozen-lockfile install, clean production advisory result, typecheck, lint, unit tests, normal/static builds, browser tests and source packaging. Evidence: `https://github.com/SirArthur23/blueprintstudio/actions/runs/38432478264`. This adds a separate clean-runner install to the earlier local evidence; it is not a security or real-user UX certification.
 
+### Dedicated Subdomain And Website-Session Handoff
+
+2026-10-13:
+
+- Maintainer confirmed IONOS hosting via SSH, chose a separate origin to isolate Blueprint local storage from the Ghost site, and reports creating `blueprintstudio.schmidtpabst.com`. The intended hosted address is now `https://blueprintstudio.schmidtpabst.com/`, superseding the original AI-site subpath plan.
+- Prepared `doc/hosting-handoff.md` for the session in the `schmidtpabst.com` workspace, with pinned published commit `6d830be`, successful final CI evidence, explicit root-path build commands, existing hardcoded-path test caveats, privacy/logging checks, deployment boundaries, live acceptance and rollback. Added the document to the explicit source allowlist; did not push it or message/create another session.
+- Public read-only checks showed the old app path returns 404 and the new hostname's HTTPS handshake fails. DNS/certificate/vhost/SSH configuration and actual log retention are not verified. User-reported subdomain creation is not a claim that the hosted beta is deployed.
+- Existing default release/browser configuration still targets `/blueprintstudio/`; new root builds require an explicit empty base path and corresponding test verification. No application behavior, default path, DNS, server, Ghost site or hosting configuration was changed in this handoff task. Live changes need scoped approval in the infrastructure session; original project work remains confined to `HITM_Blueprint/`.
+
+### Deployment Synchronization And Welcome Modal
+
+2026-10-14:
+
+- With maintainer approval, reconciled the “Blueprint Studio deployment” chat and published commits `7b025e4`/`8ef9b8f`. Imported root/path CI and browser coverage, runtime/network monitoring, preview routing, hosting notice/help link and launch/privacy documentation. Preserved the original local handoff and overlapping SOT/checklist/deployment notes; host-generated dependency notices are regenerated from this installation rather than copied as this host's inventory. No website workspace or server was edited.
+- Added a compact EN/DE welcome for first visits without an existing current/legacy draft. Read preferences only after mount/hydration; stored locale is respected. Existing or unreadable drafts are not obscured. Closing, Escape, backdrop, Explore and Quick guide remember a separate best-effort `hitm-blueprint-welcome-v1` preference; this is not blueprint data or backup content.
+- The welcome explains human ownership, deterministic planning rather than a connected AI, unencrypted local storage and JSON backups. Language can be changed inside it. It never resets a project or automatically applies a template. Reopen through More → Welcome or the quick guide. Accessible shared-dialog focus containment, inert background, focus return and canvas-shortcut protection are retained; narrow/short screens scroll within the dialog.
+- Existing workflow suites explicitly model returning visitors; dedicated welcome tests cover actual fresh visitors, both languages, persistence, current/legacy/corrupt drafts, unavailable storage, keyboard focus and narrow content. Root and retained-path verification passes (127 browser tests per build; one intentional mobile desktop-resize skip each). The modal is local implementation work, not yet committed, published, deployed or messaged to the infrastructure session.
+
+### Supplied Branding Integration
+
+2026-10-14:
+
+- Maintainer supplied `BlueprintStudio_lores.png` and `BlueprintStudio_hires.png`. Original files are untouched; byte-identical public copies are explicitly included in source/static packages. The transparent lo-res mark replaces the header's generic workflow logo and supplies the favicon. The hi-res wordmark artwork appears in the welcome, Help and both manuals; intrinsic dimensions and bounded responsive sizes avoid stretching or clipping.
+- Mint/teal accents are slightly cooler (`#0b778d`, deep `#0b5c71`, soft `#e0f2f6`) to complement blueprint blue. Primary white text has contrast 5.20:1 and deep accent 7.54:1. Functional node warning/type colours remain distinct. No semi-transparent artwork behind working canvas or text: preserving the calm readable workspace takes precedence over decoration.
+- Assets stay local; no image service, new dependency, AI call or project-data transmission is added. Deployment remains a separate infrastructure-chat task after verified source publication.
+- Verification: typecheck, lint, 262 unit tests, ordinary production build and both static builds pass. All four browser projects pass 127 cases per deployment mode, including same-origin image/MIME checks, persisted welcome preferences and no runtime/hydration errors. Narrow German content is readable; artwork shrinks on short screens so the introduction remains visible. Refreshed all twelve fictional manual screenshots (two capture cases pass) and visually inspected the welcome/short-screen/German-workflow captures. Testing is simulated, not real-user/device certification. Final `out/` is the root-hosted candidate, not a live deployment.
+
+### Welcome/Branding Publication And Handoff Approval
+
+2026-10-14:
+
+- Maintainer explicitly approved publishing the verified welcome/branding update and sending the exact commit plus deployment instructions to the “Blueprint Studio deployment” chat. Rechecked public main and the clean isolated publishing clone at `8ef9b8f` before preparing publication; no intervening upstream changes were found.
+- Publish only the reviewed standalone source and supplied public artwork, preserving existing GitHub history. Keep parent workspace history, root conversation files, private data, dependency/build caches and sibling projects out of the upload. Existing development-only audit limitation remains disclosed.
+- This approval covers source publication and the deployment handoff, not a new SSH/server change in this app chat. The infrastructure chat must verify the pinned commit, clean CI, root artifact and rollback before requesting approval to replace the live artifact. No automatic deployment or cross-chat sync is configured.
+
 ## Non-Goals For V1
 
 V1 should not include:

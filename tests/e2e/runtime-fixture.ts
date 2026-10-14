@@ -1,7 +1,12 @@
 import { test as base, expect } from "@playwright/test";
 
-export const test = base.extend<{ runtimeChecks: void }>({
-  runtimeChecks: [async ({ page, baseURL }, use) => {
+export const test = base.extend<{ runtimeChecks: void; skipWelcome: boolean }>({
+  // Existing workflow suites represent returning visitors. Dedicated welcome tests opt out.
+  skipWelcome: [true, { option: true }],
+  runtimeChecks: [async ({ page, baseURL, skipWelcome }, use) => {
+    if (skipWelcome) await page.addInitScript(() => {
+      try { localStorage.setItem("hitm-blueprint-welcome-v1", "dismissed"); } catch {}
+    });
     const errors: string[] = [];
     const unexpectedRequests: string[] = [];
     const origin = new URL(baseURL!).origin;

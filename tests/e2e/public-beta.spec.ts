@@ -24,6 +24,15 @@ test("illustrated bilingual help and feedback documents work under the deploymen
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("help/");
+  const artwork = page.locator(".help-brand-artwork");
+  await expect(artwork).toHaveAttribute("src", `${basePath}/brand/BlueprintStudio_hires.png`);
+  await expect.poll(() => artwork.evaluate((el) => (el as HTMLImageElement).naturalWidth)).toBe(1312);
+  expect(await artwork.evaluate((el) => el.getBoundingClientRect().width <= el.parentElement!.clientWidth)).toBe(true);
+  for (const name of ["lores", "hires"]) {
+    const response = await request.get(`brand/BlueprintStudio_${name}.png`);
+    expect(response.status()).toBe(200);
+    expect(response.headers()["content-type"]).toBe("image/png");
+  }
   await expect(page.locator(".manual-shot")).toHaveCount(12);
   await expect(page.locator("#en-release")).toContainText(releaseVersion);
   await expect(page.locator("#de-release")).toContainText("MIT");
@@ -46,6 +55,8 @@ test("illustrated bilingual help and feedback documents work under the deploymen
     const manual = await (await request.get(`doc/manual.${locale}.md`)).text();
     expect(manual).toContain(`../manual/${locale}/workflow.png`);
     expect(manual).not.toContain("../public/manual/");
+    expect(manual).toContain("../brand/BlueprintStudio_hires.png");
+    expect(manual).not.toContain("../public/brand/");
     expect((await request.get(`doc/feedback.${locale}.md`)).status()).toBe(200);
   }
   expect((await request.get("SECURITY.md")).status()).toBe(200);

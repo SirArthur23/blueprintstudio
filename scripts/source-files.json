@@ -12,6 +12,7 @@
   "THIRD_PARTY_NOTICES.md",
   "doc/dependency-licenses.md",
   "doc/deployment.md",
+  "doc/hosting-handoff.md",
   "doc/feedback.en.md",
   "doc/feedback.de.md",
   "doc/manual.de.md",
@@ -72,6 +73,7 @@
   "src/lib/manual-gallery.ts",
   "src/lib/public-release.ts",
   "src/lib/public-release-config.json",
+  "src/lib/welcome.ts",
   "tests/e2e/keyboard.spec.ts",
   "tests/e2e/personas.spec.ts",
   "tests/e2e/release.spec.ts",
@@ -89,5 +91,11 @@
   "vitest.config.mts",
   "tests/e2e/hosting.spec.ts",
   "tests/e2e/runtime-fixture.ts",
-  "public/hosting/index.html"
+  "tests/e2e/welcome.spec.ts",
+  "tests/unit/welcome.test.ts",
+  "public/hosting/index.html",
+  "public/brand/BlueprintStudio_lores.png",
+  "public/brand/BlueprintStudio_hires.png",
+  "src/lib/brand.ts",
+  "tests/unit/brand.test.ts"
 ]

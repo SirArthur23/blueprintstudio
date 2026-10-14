@@ -18,7 +18,7 @@ for (const file of ["LICENSE", "PRIVACY.md", "SECURITY.md", "THIRD_PARTY_NOTICES
   await copyFile(file, `out/${file}`);
   if (file.startsWith("doc/manual.")) {
     const markdown = await readFile(file, "utf8");
-    await writeFile(`out/${file}`, markdown.replaceAll("../public/manual/", "../manual/"));
+    await writeFile(`out/${file}`, markdown.replaceAll("../public/manual/", "../manual/").replaceAll("../public/brand/", "../brand/"));
   }
 }
 await cp("release/licenses", "out/third-party", { recursive: true });

@@ -8,9 +8,10 @@
   --faint: #8995a3;
   --line: #d9e2ea;
   --line-strong: #b9c8d3;
-  --teal: #087f8c;
-  --teal-deep: #076471;
-  --teal-soft: #dff4f4;
+  --teal: #0b778d;
+  --teal-deep: #0b5c71;
+  --teal-soft: #e0f2f6;
+  --teal-rgb: 11, 119, 141;
   --sky: #dcecf8;
   --blue: #2369c9;
   --blue-soft: #e6f0ff;
@@ -41,7 +42,7 @@ body {
   min-height: 100%;
   margin: 0;
   background:
-    linear-gradient(180deg, rgba(8, 127, 140, 0.05), transparent 19rem),
+    linear-gradient(180deg, rgba(var(--teal-rgb), 0.05), transparent 19rem),
     radial-gradient(circle at top left, rgba(216, 145, 34, 0.11), transparent 24rem),
     var(--bg);
   color: var(--ink);
@@ -64,7 +65,7 @@ button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 3px solid rgba(8, 127, 140, 0.28);
+  outline: 3px solid rgba(var(--teal-rgb), 0.28);
   outline-offset: 2px;
 }
 
@@ -121,9 +122,13 @@ h3 {
   width: 2.75rem;
   height: 2.75rem;
   place-items: center;
-  border-radius: 0.95rem;
-  background: linear-gradient(135deg, var(--teal), #2aa6b4);
-  color: #fff;
+}
+
+.brand-mark img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .brand-block h1 {
@@ -391,6 +396,35 @@ h3 {
 .reset-dialog {
   width: min(31rem, 100%);
 }
+
+.welcome-dialog {
+  width: min(36rem, 100%);
+  max-height: calc(100dvh - 2rem);
+  overflow-wrap: anywhere;
+}
+
+.welcome-dialog .guide-dialog-head h2 {
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  line-height: 1.2;
+}
+
+.welcome-language { margin-top: 1rem; width: fit-content; }
+.welcome-artwork {
+  display: block;
+  width: min(12rem, 100%);
+  height: auto;
+  margin: 0.75rem auto 0;
+}
+
+@media (max-height: 640px) {
+  .welcome-artwork { width: min(6rem, 100%); }
+}
+.welcome-dialog > .welcome-intro { color: var(--ink); font-size: 0.95rem; }
+.welcome-boundary { background: var(--surface-soft); border: 1px solid var(--line); border-radius: 0.6rem; padding: 0.9rem; font-size: 0.8rem; line-height: 1.55; }
+.welcome-boundary p { margin: 0.5rem 0 0; color: var(--muted); }
+.welcome-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.1rem; }
+.welcome-actions > button { flex: 1 1 12rem; min-width: 0; white-space: normal; }
+.guide-welcome-button { margin-top: 0.75rem; }
 
 .reset-dialog-actions {
   display: flex;
@@ -1179,7 +1213,7 @@ h3 {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  border: 1px solid rgba(8, 127, 140, 0.35);
+  border: 1px solid rgba(var(--teal-rgb), 0.35);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.94);
   color: var(--teal-deep);
@@ -1262,7 +1296,7 @@ h3 {
   z-index: 4;
   width: 7rem;
   height: 5.6rem;
-  border: 1px solid rgba(8, 127, 140, 0.35);
+  border: 1px solid rgba(var(--teal-rgb), 0.35);
   border-radius: 0.35rem;
   background: rgba(255, 255, 255, 0.72);
   backdrop-filter: blur(8px);
@@ -1270,9 +1304,9 @@ h3 {
 
 .mini-viewport {
   position: absolute;
-  border: 1px solid rgba(8, 127, 140, 0.75);
+  border: 1px solid rgba(var(--teal-rgb), 0.75);
   border-radius: 0.12rem;
-  background: rgba(8, 127, 140, 0.08);
+  background: rgba(var(--teal-rgb), 0.08);
 }
 
 .mini-node {
@@ -1348,7 +1382,7 @@ h3 {
 
 .edge-group.is-selected .edge-path {
   stroke-width: 3.2;
-  filter: drop-shadow(0 0 3px rgba(8, 127, 140, 0.3));
+  filter: drop-shadow(0 0 3px rgba(var(--teal-rgb), 0.3));
 }
 
 .edge-hit-area {
@@ -1389,7 +1423,7 @@ h3 {
 }
 
 .canvas-node.is-selected {
-  box-shadow: 0 0 0 4px rgba(8, 127, 140, 0.14), 0 18px 38px rgba(25, 47, 65, 0.15);
+  box-shadow: 0 0 0 4px rgba(var(--teal-rgb), 0.14), 0 18px 38px rgba(25, 47, 65, 0.15);
 }
 
 .node-ai {
@@ -2051,7 +2085,7 @@ h3 {
   height: 1rem;
   place-items: center;
   border-radius: 999px;
-  background: rgba(8, 127, 140, 0.12);
+  background: rgba(var(--teal-rgb), 0.12);
   font-size: 0.6rem;
 }
 
@@ -2914,6 +2948,12 @@ h3 {
 }
 
 .help-document a { color: var(--teal-deep); }
+.help-brand-artwork {
+  display: block;
+  width: min(20rem, 100%);
+  height: auto;
+  margin: 1.25rem auto;
+}
 .node-stop-control { display: flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; line-height: 1.4; }
 .help-document h1 { margin: 1rem 0 0.4rem; }
 .help-document h2 { margin: 1.6rem 0 0.8rem; }

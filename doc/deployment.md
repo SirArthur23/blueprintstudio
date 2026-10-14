@@ -1,6 +1,6 @@
 # Static release deployment
 
-Live public beta: `https://blueprintstudio.schmidtpabst.com/`, a dedicated origin for browser-local projects. Arthur approved the operator notice, logging policy and infrastructure deployment on 13 October 2026; HTTPS and live acceptance checks passed. Infrastructure preparation belongs in the schmidtpabst repository/session and requires explicit approval before DNS or server changes. Build with an explicit empty base path.
+Live public beta: `https://blueprintstudio.schmidtpabst.com/`, a dedicated origin for browser-local projects. Arthur approved the operator notice, logging policy and infrastructure deployment on 13 October 2026; HTTPS and live acceptance checks passed. Infrastructure work belongs in the schmidtpabst repository/session and requires explicit approval before DNS or server changes. Build with an explicit empty base path. The [original hosting handoff](hosting-handoff.md) is retained as historical preparation evidence, not current launch status.
 
 ## Build and preview (retained path variant)
 
@@ -39,6 +39,8 @@ Maintainer-approved defaults are in `src/lib/public-release-config.json`: source
 
 ### Illustrated manuals
 
+The supplied `public/brand/BlueprintStudio_lores.png` replaces the studio header logo and favicon; `BlueprintStudio_hires.png` appears in the welcome, Help and both manuals. Both are local, unchanged copies of Arthur's supplied graphics and are explicitly included in source packaging. Static manual paths are rewritten to `../brand/`; root and retained-path browser coverage checks actual image loading. Artwork is not placed behind working canvas content.
+
 `public/manual/` contains twelve screenshots from isolated Chromium contexts: six views each in English and German. The fixture in `tests/fixtures/manual-example.ts` uses invented training material and no real records. The warning screenshot intentionally assigns final decisions to AI for demonstration, then the capture script corrects that assignment before reporting. The alternative is compared, not adopted.
 
 To refresh screenshots after a UI change, run `pnpm build:release`, `pnpm manual:screenshots`, then `pnpm build:release` again to ship the updated PNGs and metadata. The capture command requires the installed Chromium test browser and writes only the known `public/manual/` images/metadata. It does not use the user's normal browser profile. Review the images before handoff. The static build rewrites manual image paths from source-repository paths to the actual deployed `manual/` directory; originals remain unchanged.
@@ -62,6 +64,12 @@ The same command uses the host's `tar` utility to create `release/hitm-blueprint
 The included `.github/workflows/verify.yml` applies when `.github/` is at the standalone repository root. It runs checks and prepares source, but does not deploy. The packager itself creates no Git repository, remote, tag, or commit. Source publication is a separate approved operation; the maintainer-selected public repository and security/conduct contacts are configured.
 
 `pnpm audit:licenses` inventories the installed graph and supplied upstream notices without registry access. Static builds include those notices automatically. See `doc/dependency-licenses.md` for scope, platform limits, README-only/metadata-only packages, and the distinction between shipped browser assets and native/build/test tooling.
+
+## Pending welcome/branding update (2026-10-14)
+
+The app working copy incorporated the infrastructure session's published `8ef9b8f` changes and adds the bilingual welcome and supplied branding. The publishing checkout was verified clean at that commit before preparation. Arthur approved publishing this verified update and sending the exact resulting commit to the deployment chat. Source publication is separate from deployment; this preparation record does not claim that the updated welcome/branding is live.
+
+Keep the app/UI work in this project and the SSH/vhost/TLS deployment in the infrastructure chat. After approved source publication, that chat should consume the exact new commit, build with `NEXT_PUBLIC_BASE_PATH=''`, verify the artifact and perform the normal live acceptance/rollback checks. Before publication or a later app change, compare public main/SOT with the last reconciled commit so changes from the other chat are not overwritten. No automatic cross-chat sync or messaging is configured.
 
 ## Acceptance and rollback
 

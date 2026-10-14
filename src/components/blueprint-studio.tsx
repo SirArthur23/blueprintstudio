@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 import type { ChangeEvent as ReactChangeEvent, CSSProperties, KeyboardEvent as ReactKeyboardEvent, PointerEvent as ReactPointerEvent, WheelEvent as ReactWheelEvent } from "react";
 import {
@@ -79,6 +80,8 @@ import { parseBlueprintBackup } from "@/lib/blueprint-schema";
 import { blueprintForOutput } from "@/lib/blueprint-localization";
 import { AccessibleDialog, useDisclosure } from "@/components/accessible-overlays";
 import { releaseVersion } from "@/lib/public-release";
+import { rememberWelcomeDismissal, shouldShowWelcome } from "@/lib/welcome";
+import { brandAssets } from "@/lib/brand";
 
 const nodeSize = { width: 200, height: 170 };
 const canvasWorld = { width: 7000, height: 5000 };
@@ -212,6 +215,7 @@ export function BlueprintStudio() {
   const [canvasControlsOpen, setCanvasControlsOpen] = useState(false);
   const [templateOpen, setTemplateOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
+  const [welcomeOpen, setWelcomeOpen] = useState(false);
   const [pendingProjectReset, setPendingProjectReset] = useState<ProjectResetTarget | null>(null);
   const [dialogOpener, setDialogOpener] = useState<HTMLElement | null>(null);
   const moreDisclosure = useDisclosure(moreActionsOpen, setMoreActionsOpen);
@@ -256,10 +260,16 @@ export function BlueprintStudio() {
       const stored = readStoredBlueprintState();
       setBlueprint(stored.blueprint);
       setStorageBlocked(stored.failed);
+      try {
+        if (shouldShowWelcome(window.localStorage)) {
+          setDialogOpener(moreDisclosure.triggerRef.current);
+          setWelcomeOpen(true);
+        }
+      } catch {}
       setStorageReady(true);
     });
     return () => window.cancelAnimationFrame(frame);
-  }, []);
+  }, [moreDisclosure.triggerRef]);
 
   useEffect(() => {
     if (!storageReady || storageBlocked) return;
@@ -781,6 +791,11 @@ export function BlueprintStudio() {
     setDialogOpener(moreDisclosure.containerRef.current?.contains(active) ? moreDisclosure.triggerRef.current : active);
   }
 
+  function closeWelcome() {
+    try { rememberWelcomeDismissal(window.localStorage); } catch {}
+    setWelcomeOpen(false);
+  }
+
   function confirmProjectReset() {
     if (pendingProjectReset === "demo") resetDemo();
     if (pendingProjectReset === "blank") startBlank();
@@ -968,7 +983,7 @@ export function BlueprintStudio() {
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
       const target = event.target as HTMLElement | null;
-      if (event.defaultPrevented || helpOpen || pendingProjectReset || target?.closest(".top-menu, .template-control")) return;
+      if (event.defaultPrevented || welcomeOpen || helpOpen || pendingProjectReset || target?.closest(".top-menu, .template-control")) return;
       if (target?.matches("input, textarea, select, [contenteditable='true']")) return;
 
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "z") {
@@ -1002,7 +1017,7 @@ export function BlueprintStudio() {
       <header className="studio-topbar">
         <div className="brand-block">
           <div className="brand-mark" aria-hidden="true">
-            <Workflow size={24} />
+            <Image {...brandAssets.mark} alt="" unoptimized />
           </div>
           <div>
             <h1>HITM Blueprint Studio</h1>
@@ -1061,6 +1076,7 @@ export function BlueprintStudio() {
                 <button onClick={() => { requestProjectReset("blank"); setMoreActionsOpen(false); }} type="button"><RefreshCw size={16} /> {t("startBlank")}</button>
                 <button onClick={() => { generateFromIntake(); setMoreActionsOpen(false); }} type="button"><Workflow size={16} /> {t("generateFromBrief")}</button>
                 <button onClick={() => { rememberDialogOpener(); setHelpOpen(true); setMoreActionsOpen(false); }} type="button"><CircleHelp size={16} /> {t("howToUse")}</button>
+                <button onClick={() => { rememberDialogOpener(); setWelcomeOpen(true); setMoreActionsOpen(false); }} type="button"><Workflow size={16} /> {t("showWelcome")}</button>
                 <button onClick={() => { setImportFailed(false); requestImport(); setMoreActionsOpen(false); }} type="button"><Upload size={16} /> {t("importBlueprint")}</button>
                 <button onClick={() => { exportJson(); setMoreActionsOpen(false); }} type="button"><Download size={16} /> {t("exportBackup")}</button>
                 <button onClick={printReport} type="button"><Printer size={16} /> {t("printReport")}</button>
@@ -1077,6 +1093,25 @@ export function BlueprintStudio() {
         </div>
       </header>
       <input accept="application/json,.json" aria-label="Import Blueprint Studio export" className="visually-hidden" onChange={importBlueprint} ref={importInputRef} type="file" />
+      {welcomeOpen && localeReady && storageReady ? (
+        <AccessibleDialog titleId="welcome-dialog-title" className="welcome-dialog" onClose={closeWelcome} returnFocusTo={dialogOpener}>
+          <div className="guide-dialog-head">
+            <div><span>{t("showWelcome")}</span><h2 id="welcome-dialog-title">{t("welcomeTitle")}</h2></div>
+            <button aria-label={t("closeWelcome")} className="tool-icon" onClick={closeWelcome} type="button"><X size={16} /></button>
+          </div>
+          <Image {...brandAssets.artwork} alt="Blueprint Studio" className="welcome-artwork" unoptimized />
+          <div aria-label={t("language")} className="language-switcher welcome-language">
+            {supportedLocales.map((item) => <button aria-label={item.label} aria-pressed={locale === item.id} className={cx(locale === item.id && "is-active")} key={item.id} onClick={() => setLocale(item.id)} type="button">{item.label}</button>)}
+          </div>
+          <p className="welcome-intro">{t("welcomeIntro")}</p>
+          <p>{t("welcomeSteps")}</p>
+          <div className="welcome-boundary"><strong>{t("welcomeLocalTitle")}</strong><p>{t("welcomeBoundary")}</p><p>{t("welcomeBackup")}</p></div>
+          <div className="welcome-actions">
+            <button className="primary-button" onClick={closeWelcome} type="button">{t("welcomeStart")}<ArrowRight size={16} /></button>
+            <button className="ghost-button" onClick={() => { closeWelcome(); setHelpOpen(true); }} type="button">{t("welcomeGuide")}</button>
+          </div>
+        </AccessibleDialog>
+      ) : null}
       {helpOpen ? (
         <AccessibleDialog titleId="guide-dialog-title" onClose={() => setHelpOpen(false)} returnFocusTo={dialogOpener}>
             <div className="guide-dialog-head">
@@ -1087,6 +1122,7 @@ export function BlueprintStudio() {
               <button aria-label={t("closeQuickGuide")} className="tool-icon" onClick={() => setHelpOpen(false)} type="button"><X size={16} /></button>
             </div>
             <p>{t("guideIntro")}</p>
+            <button className="ghost-button guide-welcome-button" onClick={() => { setHelpOpen(false); setWelcomeOpen(true); }} type="button">{t("showWelcome")}</button>
             <div className="guide-steps">
               <button onClick={() => { goToStep("context"); setHelpOpen(false); }} type="button"><span>1</span><strong>{t("guideOneTitle")}</strong><small>{t("guideOneDetail")}</small></button>
               <button onClick={() => { goToStep("workflow"); setHelpOpen(false); }} type="button"><span>2</span><strong>{t("guideTwoTitle")}</strong><small>{t("guideTwoDetail")}</small></button>

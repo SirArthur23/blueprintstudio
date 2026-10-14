@@ -1,6 +1,12 @@
 # Blueprint Studio: der erste Blueprint in zehn Minuten
 
-Handbuch für die Beta-Vorschau, anhand simulierter Persona-Aufgaben geprüft. Screenshots nutzen ein erfundenes Schulungsprojekt, keine Daten eines echten Teams. [Quellcode](https://github.com/SirArthur23/blueprintstudio); [allgemeine Rückmeldung](mailto:blueprintstudio@schmidtpabst.com). Die gehostete Veröffentlichung wird noch vorbereitet.
+<img src="../public/brand/BlueprintStudio_hires.png" alt="Blueprint Studio" width="360" />
+
+Handbuch für die [öffentliche Beta](https://blueprintstudio.schmidtpabst.com/), anhand simulierter Persona-Aufgaben geprüft. Screenshots nutzen ein erfundenes Schulungsprojekt, keine Daten eines echten Teams. [Quellcode](https://github.com/SirArthur23/blueprintstudio); [allgemeine Rückmeldung](mailto:blueprintstudio@schmidtpabst.com).
+
+## Willkommen
+
+Ein neuer Browser ohne gespeicherten Entwurf zeigt einen kurzen Willkommensdialog. Wählen Sie English/Deutsch, **Studio erkunden** oder **Kurzanleitung zeigen**. Schließen, Escape und ein Klick außerhalb schließen ihn ebenfalls. Dabei wird kein Leerstart ausgeführt oder Projekt ersetzt. Der Browser merkt sich das Schließen nach Möglichkeit; diese Einstellung gehört nicht zur JSON-Sicherung. Vorhandene Entwürfe und Speicherfehler werden nicht unterbrochen. Erneut öffnen: **Mehr → Willkommen im Studio** oder **Studio-Anleitung → Willkommen im Studio**. Auf der öffentlichen Website erscheinen diese Bedienelemente erst nach Bereitstellung des Updates.
 
 ## 1. Eine konkrete Aufgabe beschreiben
 

@@ -23,7 +23,7 @@ import { additionalHitmChecks, isHumanControl, isHumanOwner } from "@/lib/hitm-s
 import { blueprintForOutput, germanPromptItems, localizeDefaultRole, localizeDemoIntake } from "@/lib/blueprint-localization";
 
 export const storageKey = "hitm-blueprint-file-v6";
-const legacyStorageKeys = ["hitm-blueprint-file-v5", "hitm-blueprint-file-v4", "hitm-blueprint-file-v3"];
+export const legacyStorageKeys = ["hitm-blueprint-file-v5", "hitm-blueprint-file-v4", "hitm-blueprint-file-v3"];
 
 export type CanvasSnapshot = Pick<BlueprintFile, "nodes" | "edges">;
 

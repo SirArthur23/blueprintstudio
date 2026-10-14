@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { brandAssets } from "@/lib/brand";
 import { manualScreenshots } from "@/lib/manual-gallery";
 import { releaseLinks, releaseVersion } from "@/lib/public-release";
 import type { Locale } from "@/lib/i18n";
@@ -24,7 +25,7 @@ function ReleaseDetails({ locale }: { locale: Locale }) {
   return <section id={`${locale}-release`} lang={locale} className="release-details">
     <h2>{en ? "About this beta, source & feedback" : "Über diese Beta, Quellcode & Rückmeldung"}</h2>
     <p>{en ? "Beta preview" : "Beta-Vorschau"} · {releaseVersion} · MIT · © 2026 Arthur Schmidt-Pabst</p>
-    <p>{en ? "Free, deterministic and local-first. Hosted beta rollout is being prepared; no account, connected AI service, analytics or project-upload endpoint is added." : "Kostenlos, deterministisch und lokal im Browser. Die gehostete Beta wird vorbereitet; ohne Konto, angebundenen KI-Dienst, Analysewerkzeuge oder Projektdaten-Upload."}</p>
+    <p>{en ? "Free, deterministic and local-first. The public beta uses a dedicated origin; no account, connected AI service, analytics or project-upload endpoint is added." : "Kostenlos, deterministisch und lokal im Browser. Die öffentliche Beta nutzt eine eigene Origin; ohne Konto, angebundenen KI-Dienst, Analysewerkzeuge oder Projektdaten-Upload."}</p>
     {releaseLinks.sourceUrl ? <p><a href={releaseLinks.sourceUrl} target="_blank" rel="noopener noreferrer">{en ? "Source code" : "Quellcode"}</a></p> : <p className="release-source-pending">{en ? "The public repository link is not configured yet. The source release is being prepared; no placeholder repository is presented as live." : "Der öffentliche Repository-Link ist noch nicht eingerichtet. Die Quellcode-Veröffentlichung wird vorbereitet; ein Platzhalter wird nicht als live ausgegeben."}</p>}
     {releaseLinks.feedbackUrl ? <p><a href={releaseLinks.feedbackUrl} target="_blank" rel="noopener noreferrer">{en ? "Send beta feedback" : "Beta-Rückmeldung senden"}</a></p> : <p className="release-feedback-pending">{en ? "The feedback destination is not configured yet. You can prepare a report using the template below; nothing is sent automatically." : "Die Meldestelle für Rückmeldungen ist noch nicht eingerichtet. Nutzen Sie die Vorlage unten zur Vorbereitung; nichts wird automatisch versendet."}</p>}
     <p>{en ? "Share a fictional reproduction, browser, language and version. Never post a private project export, confidential screenshot or exploitable security issue in public feedback. No project details are attached to these links." : "Nennen Sie ein erfundenes Beispiel zum Nachstellen sowie Browser, Sprache und Version. Keine privaten Projektexporte, vertraulichen Screenshots oder ausnutzbaren Sicherheitsprobleme öffentlich melden. Diese Links hängen keine Projektdetails an."}</p>
@@ -41,13 +42,15 @@ export default function HelpPage() {
   return (
     <main className="help-document">
       <a href={`${basePath}/`}>← Blueprint Studio</a>
+      <Image {...brandAssets.artwork} alt="Blueprint Studio" className="help-brand-artwork" unoptimized />
       <h1>Manual / Handbuch</h1>
-      <p>Public beta preparation · Vorbereitung der öffentlichen Beta</p>
+      <p>Public beta · Öffentliche Beta</p>
       <nav aria-label="Help language"><a href="#english">English</a><a href="#deutsch">Deutsch</a></nav>
       {process.env.BLUEPRINT_STATIC_EXPORT === "1" ? <p><a href={`${basePath}/hosting/`}>Operator, privacy & imprint / Betreiber, Datenschutz & Impressum</a></p> : null}
       {process.env.BLUEPRINT_STATIC_EXPORT === "1" ? <nav aria-label="Full manuals"><a href={`${basePath}/doc/manual.en.md`}>Full English manual (Markdown)</a><a href={`${basePath}/doc/manual.de.md`}>Deutsches Handbuch (Markdown)</a><a href={`${basePath}/PRIVACY.md`}>Privacy / Datenschutz</a></nav> : null}
       <section id="english" lang="en">
         <h2>Your first blueprint</h2>
+        <p>New visitors without a saved draft see a short welcome. Choose English/Deutsch, explore the example, or open the quick guide. Closing it never replaces a project. Reopen it with <strong>More → Welcome to Studio</strong> or from <strong>How to use Studio</strong>. Its dismissal preference is browser-local, not part of a JSON backup.</p>
         <ol>
           <li>Open <strong>Project brief → Project</strong>. Enter a project name, audience, and concrete outcome. Under Operating details, describe AI assistance, human control, sources, and risk settings.</li>
           <li>Generate from intake or choose a template. Review the proposed workflow, select nodes to edit them, and replace owner placeholders. Generation/templates replace the canvas; export a backup of custom work first.</li>
@@ -68,6 +71,7 @@ export default function HelpPage() {
       </section>
       <section id="deutsch" lang="de">
         <h2>Ihr erster Blueprint</h2>
+        <p>Neue Besucher ohne gespeicherten Entwurf sehen einen kurzen Willkommensdialog. Wählen Sie English/Deutsch, erkunden Sie das Beispiel oder öffnen Sie die Kurzanleitung. Das Schließen ersetzt kein Projekt. Erneut öffnen: <strong>Mehr → Willkommen im Studio</strong> oder über die <strong>Studio-Anleitung</strong>. Die Einstellung bleibt im Browser und gehört nicht zur JSON-Sicherung.</p>
         <ol>
           <li>Öffnen Sie <strong>Projektübersicht → Projekt</strong>. Beschreiben Sie Projektname, Zielgruppe und ein konkretes Ergebnis. Unter Rahmenbedingungen ergänzen Sie KI-Unterstützung, menschliche Kontrolle, Quellen und Risikoeinstellungen.</li>
           <li>Erstellen Sie einen Entwurf oder wählen Sie eine Vorlage. Bearbeiten Sie Knoten und ersetzen Sie Rollenplatzhalter. Generierung und Vorlagen ersetzen die Fläche; sichern Sie manuelle Arbeit vorher als JSON.</li>

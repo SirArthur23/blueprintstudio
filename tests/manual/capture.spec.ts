@@ -12,6 +12,7 @@ for (const locale of ["en", "de"] as const) {
     await mkdir(folder, { recursive: true });
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
+    await page.addInitScript(() => localStorage.setItem("hitm-blueprint-welcome-v1", "dismissed"));
     await page.goto("./");
     await expect(page.getByText("Saved locally", { exact: true })).toBeVisible();
     if (locale === "de") await page.getByRole("button", { name: "DE", exact: true }).click();

@@ -1,6 +1,12 @@
 # Blueprint Studio: first blueprint in ten minutes
 
-Manual for the beta preview, checked against scripted persona journeys. Screenshots use an invented training project, not a real team’s records. [Source repository](https://github.com/SirArthur23/blueprintstudio); [general feedback](mailto:blueprintstudio@schmidtpabst.com). Hosted rollout remains in preparation.
+<img src="../public/brand/BlueprintStudio_hires.png" alt="Blueprint Studio" width="360" />
+
+Manual for the [public beta](https://blueprintstudio.schmidtpabst.com/), checked against scripted persona journeys. Screenshots use an invented training project, not a real team’s records. [Source repository](https://github.com/SirArthur23/blueprintstudio); [general feedback](mailto:blueprintstudio@schmidtpabst.com).
+
+## Welcome
+
+A new browser with no saved draft shows a short welcome. Choose English/Deutsch, **Explore Studio**, or **Show the quick guide**. Close, Escape and clicking outside also dismiss it. This never starts blank or replaces work. Dismissal is a best-effort browser preference, separate from JSON backups; existing drafts and storage errors are not interrupted. Reopen through **More → Welcome to Studio**, or **How to use Studio → Welcome to Studio**. The welcome update must be deployed before these controls appear on the public site.
 
 ## 1. Describe a concrete task
 
