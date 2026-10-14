@@ -1056,3 +1056,13 @@ Prepared from the public standalone commit `6d830bead2c5f7750f8cf5777117af5b5e61
 ## Dedicated-origin public beta launched, 2026-10-13
 
 Arthur changed the subdomain A record to the existing IONOS VPS and removed its parking AAAA record, then explicitly approved the prepared source updates, operator notice, logging policy and server deployment. The static beta is live at `https://blueprintstudio.schmidtpabst.com/`. Deployed application source is `7b025e497822e035503bfe24074be87757549a0b`, based on the required pinned public commit; the exact approved root archive hash and live verification are in doc/deployment.md. All 64 public files match the artifact, normal certificate validation succeeds, and 103 live isolated fictional-project browser checks pass with the existing mobile resize skip. The infrastructure session records snapshots/rollback; Ghost and existing configurations/containers were preserved. This follow-up records the launch and adds CI coverage for both root and retained path. Runtime behavior and deployed bytes are unchanged. Feedback delivery, actual-user/device studies, video recordings and SQL remain outside completed launch scope.
+
+### Infrastructure acceptance attempt and rollback
+
+2026-10-14:
+
+- Arthur approved deployment of published `90c7c1f`. Infrastructure built the exact root source without app-code changes; 262 unit tests and 127 local root browser cases passed, with the existing mobile resize skip. The sealed 66-file artifact hash is recorded in doc/deployment.md.
+- After switching the live static link, all file hashes, HTTPS/MIME/cache/redirect/304/404 checks and PNG byte ranges passed; existing configurations, containers and public site baselines were preserved.
+- Strict live runtime/network acceptance still flagged image/favicon cancellations during scripted navigation. The raw run passed 113 and failed 14; readiness-only supplementary verification passed 125 with two Firefox native cancellation flags. Assertions/errors were not skipped or filtered. A buffering diagnostic produced harness teardown errors and is not accepted as app verification.
+- Infrastructure restored and reverified the previous `7b025e4` release rather than waive the guard. Welcome/branding remains a retained candidate, not the current live app. A reviewable test-only readiness/explicit cancellation-classification proposal has not been applied or published and requires separate agreement before source changes and a new acceptance attempt. No app runtime, asset, storage schema or server-policy change was made during diagnosis.
+- This follow-up records the actual rollback for the app chat to reconcile from GitHub; it does not publish a test fix or authorize another deployment.
